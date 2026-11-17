@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+import Rating from "@/components/elements/Rating.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+<h3 class="text-4xl font-semibold">{t("experience")}</h3>
+<section class="grid grid-cols-1 md:grid-cols-3 md:gap-10 gap-6 pr-6">
+  <div class="text-sm flex flex-col gap-4">
+    <h2 class="text-xl">Frontend:</h2>
+    <div class="flex flex-col gap-2 max-w-72">
+      <p>HTML,CSS</p>
+      <Rating percentage="90" bgcolor="primary" />
+      <p>JS</p>
+      <Rating percentage="80" bgcolor="secondary" />
+      <p>TS</p>
+      <Rating percentage="70" bgcolor="tertiary" />
+      <p>Stack most used:</p>
+      <p class="text-xs">Tailwind, Laravel, Astro, NextJS & Parcel</p>
+    </div>
+  </div>
+
+  <div class="text-sm flex flex-col gap-4">
+    <h2 class="text-xl">Backend:</h2>
+    <div class="flex flex-col gap-2 max-w-72">
+      <p>PHP</p>
+      <Rating percentage="90" bgcolor="quaternary" />
+      <p>Java</p>
+      <Rating percentage="70" bgcolor="tertiary" />
+      <p>SQL, Ajax</p>
+      <Rating percentage="50" bgcolor="secondary" />
+      <p>Stack most used:</p>
+      <p class="text-xs">PHP & TS</p>
+    </div>
+  </div>
+
+  <div class="text-sm flex flex-col gap-4">
+    <h2 class="text-xl">Others:</h2>
+    <div class="flex flex-col gap-2 max-w-72">
+      <p>GIT</p>
+      <Rating percentage="80" bgcolor="primary" />
+      <p>Bash</p>
+      <Rating percentage="50" bgcolor="secondary" />
+      <p>Linux</p>
+      <Rating percentage="70" bgcolor="tertiary" />
+      <p>Stack most used:</p>
+      <p class="text-xs">SSH, git, linux</p>
+    </div>
+  </div>
+</section>
+<a
+  class="self-end flex items-center gap-2 underline"
+  rel="noopener noreferrer"
+  href="https://github.com/jramma"
+  target="_blank"
+>
+  Check my github
+  <Icon name="github" class="w-10 h-10 animate-bounce" /></a
+>

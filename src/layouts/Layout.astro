@@ -1,0 +1,96 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import Nav from "@/components/Nav.astro";
+import ThemeSwitch from "@/components/ThemeSwitch.astro";
+import LanguagePicker from "@/components/LanguagePicker.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { getLangFromUrl } from "../i18n/utils.ts";
+
+export const getUrls = (lang: "es" | "en" | "ca" = "es") => {
+    const texts: Record<
+        "es" | "en" | "ca",
+        {
+            home: string;
+            projects: string;
+            contact: string;
+        }
+    > = {
+        es: {
+            home: "Inicio",
+            projects: "Proyectos",
+            contact: "Contacto",
+        },
+        en: {
+            home: "Home",
+            projects: "Projects",
+            contact: "Contact",
+        },
+        ca: {
+            home: "Inici",
+            projects: "Projectes",
+            contact: "Contacte",
+        },
+    };
+    const t = texts[lang];
+
+    const prefix = lang === "es" ? "" : `/${lang}`;
+
+    return [
+        { href: `${prefix}/`, text: t.home, shadow: "primary" },
+        { href: `${prefix}/projects`, text: t.projects, shadow: "secondary" },
+        { href: `${prefix}/contact`, text: t.contact, shadow: "quaternary" },
+    ];
+};
+
+const lang = getLangFromUrl(Astro.url);
+const path = Astro.url.pathname;
+const urls = getUrls(lang);
+---
+
+<!doctype html>
+<html lang={lang}>
+    <head>
+        <BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+    </head>
+    <body
+        class={`h-dvh w-screen flex flex-col dark:text-white text-black p-4 md:p-8 overflow-hidden relative`}
+    >
+        <div class="border-[1rem] border-white z-50 border-solid dark:border-black flex grow">
+            <div class="relative overflow-hidden flex grow">
+                <div class="flex flex-col overflow-hidden grow relative border-solid border-black dark:border-white border max-h-full">
+                    <Header />
+                    <main
+                        transition:animate="slide"
+                        class="relative shrink-0 flex flex-col h-full p-4 md:p-4 no-scrollbar overflow-visible"
+                    >
+                        <slot />
+                    </main>
+                    <Nav urls={urls}  />
+
+                    <div class="fixed bottom-10 right-10 flex gap-6 items-baseline justify-end">
+                        <ThemeSwitch  />
+                        <LanguagePicker
+                            currentLang={lang}
+                            currentPath={path}
+                            
+                        />
+                    </div>
+                    <Footer />
+                </div>
+                <div class="background -z-20 absolute inset-0 max-h-full max-w-full">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

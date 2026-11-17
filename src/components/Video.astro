@@ -1,0 +1,38 @@
+---
+interface Props {
+    webmSrc: string;
+    mp4Src?: string;
+    className?: string;
+    autoPlay?: boolean;
+    controls?: boolean;
+    muted?: boolean;
+    loop?: boolean;
+    preload?: "auto" | "metadata" | "none";
+    playsInline?: boolean;
+}
+const {
+    webmSrc,
+    mp4Src,
+    className = "",
+    autoPlay = true,
+    controls = false,
+    muted = true,
+    loop = true,
+    preload = "auto",
+    playsInline = true,
+} = Astro.props;
+---
+
+<video
+    class={className}
+    controls={controls}
+    autoplay={autoPlay}
+    muted={muted}
+    loop={loop}
+    preload={preload}
+    playsinline={playsInline}
+>
+    <source src={webmSrc} type="video/webm" />
+    {mp4Src && <source src={mp4Src} type="video/mp4" />}
+    Your browser does not support the video tag.
+</video>

@@ -1,0 +1,34 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { slide } from "astro:transitions";
+import FuzzyText from "@/components/react/FuzzyText";
+---
+
+<Layout>
+  <div
+    class="self-center my-auto pb-8"
+    transition:animate={slide({ duration: "0.4s" })}
+  >
+    <span class="hidden dark:block">
+      <FuzzyText
+        client:load
+        baseIntensity={0.2}
+        hoverIntensity={0.5}
+        enableHover={true}
+        html="404 "
+        color="#ffffff"
+      />
+    </span>
+    <span class=" dark:hidden">
+      <FuzzyText
+        client:load
+        baseIntensity={0.2}
+        hoverIntensity={0.5}
+        enableHover={true}
+        html="404 "
+        color="#000000"
+      />
+    </span>
+    <p class="self-center  text-center mt-6" >Ups!</p>
+  </div>
+</Layout>

@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { fade } from "astro:transitions";
+import Hero from "@/components/Hero.astro";
+import Skills from "@/components/Skills.astro";
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Layout>
+  <!-- <Tailwind /> -->
+  <div
+    transition:animate={fade({ duration: "0.4s" })}
+    class="absolute bg-white/60 md:px-6 dark:bg-black/80 right-0 px-2 py-40 md:right-20 md:w-1/2 overflow-scroll max-h-full no-scrollbar max-w-full"
+  >
+    <div class="flex flex-col pt-6 md:py-10 gap-10 md:gap-4 md:max-h-none">
+      <Hero />
+      <Skills />
+      <div class="flex flex-col gap-4">
+        <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+        <h2 class="text-2xl font-semibold tracking-wide">
+          {t("technologies")}
+        </h2>
+        <a href="https://skillicons.dev" class="block">
+          <img
+            src="https://skillicons.dev/icons?i=ts,js,php,html,css,react,angular,nodejs,nextjs,astro,laravel,wordpress,mongodb,mysql,vscode,vim,git,bun,figma,postman,linux,java"
+            class="w-full h-auto"
+            alt="Skills icons"
+          />
+        </a>
+      </div>
+    </div>
+  </div>
+</Layout>

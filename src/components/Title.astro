@@ -1,0 +1,18 @@
+---
+const { text, id } = Astro.props;
+import { Icon } from "astro-icon/components";
+---
+
+<button
+  data-id={id}
+  class="title cursor-pointer flex flex-col py-6 gap-2 w-full text-left group"
+>
+  <div id={id} class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+  <div class="flex justify-between items-center">
+    <h2 class="text-3xl font-semibold cursor-pointer">{text}</h2>
+    <Icon
+      name="chevron2"
+      class="chevron-icon w-10 h-10 transition-transform  duration-300"
+    />
+  </div>
+</button>

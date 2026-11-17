@@ -1,0 +1,31 @@
+---
+type BgType = "primary" | "secondary" | "tertiary" | "quaternary";
+const { percentage = 0, bgcolor = "primary" } = Astro.props;
+
+// Definimos las clases de fondo usando Tailwind
+const bgClasses: Record<BgType, string> = {
+  primary: "bg-primary", // Usa el color primary de tu configuración
+  secondary: "bg-secondary", // Usa el color secondary de tu configuración
+  tertiary: "bg-tertiary", // Usa el color tertiary de tu configuración
+  quaternary: "bg-quaternary", // Usa el color quaternary de tu configuración
+};
+
+const bgClasses2: Record<BgType, string> = {
+  primary: "bg-primary/20", // Usa el color primary-dark de tu configuración
+  secondary: "bg-secondary/20", // Usa el color secondary-dark de tu configuración
+  tertiary: "bg-tertiary/20", // Usa el color tertiary-dark de tu configuración
+  quaternary: "bg-quaternary/20", // Usa el color quaternary-dark de tu configuración
+};
+
+const getBgClass = (bgcolor: BgType) => {
+  return bgClasses[bgcolor] || "";
+};
+
+const getBgClass2 = (bgcolor: BgType) => {
+  return bgClasses2[bgcolor] || "";
+};
+---
+
+<div class={`w-full relative border-black py-2 dark:shadow-card-dark shadow-card  border-solid border rounded-md h-2 overflow-hidden ${getBgClass2(bgcolor)}`}>
+  <div class={`h-full flex absolute inset-0 transition-all duration-300 ${getBgClass(bgcolor)}`} style={`width: ${percentage}%`}></div>
+</div>

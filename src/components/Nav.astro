@@ -1,0 +1,44 @@
+---
+// Nav.astro
+interface NavLink {
+    text: string;
+    href: string;
+    shadow?: string;
+}
+
+interface Props {
+    urls: NavLink[];
+}
+import Link from "./Link.astro";
+const { urls } = Astro.props;
+---
+
+<div>
+    <!-- Checkbox oculto que controla el menú (sin JS) -->
+    <input type="checkbox" id="menu-toggle" class="peer hidden" />
+
+    <!-- Botón hamburguesa -->
+    <label
+        for="menu-toggle"
+        class="fixed top-12 right-12 z-50 md:hidden cursor-pointer"
+        aria-label="Abrir menú"
+    >
+        <div id="hamburger" class="flex flex-col gap-1.5">
+            <span class="block w-7 h-0.5 bg-black dark:bg-white transition-transform duration-300 peer-checked:rotate-45 peer-checked:translate-y-2"></span>
+            <span class="block w-7 h-0.5 bg-black dark:bg-white transition-opacity duration-300 peer-checked:opacity-0"></span>
+            <span class="block w-7 h-0.5 bg-black dark:bg-white transition-transform duration-300 peer-checked:-rotate-45 peer-checked:-translate-y-2"></span>
+        </div>
+    </label>
+
+    <!-- Menú -->
+    <nav
+        id="mobile-menu"
+        class="flex -translate-x-full peer-checked:translate-x-0 md:translate-x-0 transition-transform duration-300 ease-in-out fixed top-0 left-0 h-full w-1/2 max-w-xs dark:bg-black bg-white md:bg-transparent dark:md:bg-transparent pt-40 md:pt-0 p-8 md:p-0 flex-col text-xl z-40 md:absolute md:top-52 md:left-6 md:w-auto md:h-auto gap-6"
+    >
+        {urls.map((url) => (
+            <Link href={url.href} text={url.text} shadow={url.shadow} />
+        ))}
+    </nav>
+</div>
+
+<!-- Mobile -->

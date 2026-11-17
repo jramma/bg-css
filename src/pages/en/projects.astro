@@ -1,0 +1,84 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import List from "@/components/List.astro";
+import { slide } from "astro:transitions";
+import { fetchGithubRepos } from "@/data/github";
+const repos = [
+    {
+        name: "Quest Tattoo Studio",
+        url: "https://questtattoostudio.com/",
+        date: "2025-08-01",
+        language: "Astro",
+        video: "/video/quest.webm",
+        mp4: "/video/quest.mp4",
+    },
+    {
+        name: "Sorolla Portfolio",
+        url: "https://sorolla.casset.cat/",
+        date: "2025-01-21",
+        language: "Astro, Tailwind",
+        video: "/video/sorolla.webm",
+        mp4: "/video/sorolla.mp4",
+    },
+    {
+        name: "Ob-La-Di",
+        url: "https://casset.cat",
+        date: "2025-04-22",
+        language: "NextJS, AWS, MongoDB, Maps",
+        video: "/video/obladi.webm",
+        mp4: "/video/obaldi.mp4",
+    },
+    {
+        name: "My CV",
+        url: "https://casset.cat",
+        date: "2025-03-15",
+        language: "Astro, React",
+        video: "/video/cv.webm",
+        mp4: "/video/cv.mp4",
+    },
+    {
+        name: "Ecommerce",
+        url: "https://casset.cat",
+        date: "2025-01-21",
+        language: "Astro, React",
+        video: "/video/gym.webm",
+        mp4: "/video/gym.mp4",
+    },
+    {
+        name: "University project",
+        url: "https://casset.cat",
+        date: "2024-05-12",
+        language: "Astro",
+        video: "/video/pec3.webm",
+        mp4: "/video/pec3.mp4",
+    },
+];
+let repos2 = [];
+try {
+    repos2 = await fetchGithubRepos();
+} catch (error) {
+    console.error("Error loading repositories:", error);
+}
+---
+
+<Layout>
+    <div class="absolute bg-white/60 dark:bg-black/80 p-2 top-0 py-20 md:pt-0 md:max-w-1/2 right-0 h-screen md:right-12 overflow-visible flex">
+        <ul
+            transition:animate={slide({ duration: "0.4s" })}
+            class="w-full grow text-right flex flex-col gap-6 pb-96 pt-20 md:pt-56 overflow-auto no-scrollbar"
+        >
+            <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+
+            <List data={repos} title="Webs" />
+
+            <!-- <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+      <Prices /> -->
+
+            <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+
+            <ul class="flex flex-col gap-4 items-end">
+                <List data={repos2} title="Github" />
+            </ul>
+        </ul>
+    </div>
+</Layout>

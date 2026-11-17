@@ -1,0 +1,23 @@
+{
+    "name": "Web Developer Barcelona",
+    "short_name": "bgblur.casset.cat",
+    "description": "A template web.",
+    "icons": [
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#ffd63a",
+    "background_color": "#040404",
+    "display": "standalone",
+    "start_url": "/?source=pwa",
+    "lang": "es"
+}

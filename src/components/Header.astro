@@ -1,0 +1,13 @@
+---
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<header
+  class="flex-1 flex absolute flex-col gap-1 md:gap-3 py-2 z-40 px-4 md:px-6 md:py-6 overflow-visible self-start backdrop-blur-lg dark:bg-black/80 bg-opacity-35 w-full"
+>
+  <a href="/" class="text-3xl md:text-7xl font-extralight">Casset.cat</a>
+  <h1 class="font-light text-xs md:text-3xl ">{t("home.h1")}</h1>
+</header>

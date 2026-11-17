@@ -1,0 +1,56 @@
+---
+type ShadowType = "primary" | "secondary" | "tertiary" | "quaternary" | "wp";
+
+interface Props {
+  post: any;
+  title?: string;
+  description?: string;
+  price?: string;
+}
+
+const {
+  post,
+  title = post.data.title,
+  description = post.data.description,
+  price = post.data.price
+} = Astro.props;
+
+const shadowClasses: Record<ShadowType, string> = {
+  primary: "shadow-primary hover:shadow-primaryHover",
+  secondary: "shadow-secondary hover:shadow-secondaryHover",
+  tertiary: "shadow-tertiary hover:shadow-tertiaryHover",
+  quaternary: "shadow-quaternary hover:shadow-quaternaryHover",
+  wp: "shadow-wp hover:shadow-wpHover"
+};
+
+const getShadowClass = (shadow: ShadowType) => {
+  return shadowClasses[shadow] || "";
+};
+---
+
+<a href={`/webs/${post.id}`} class="group">
+  <div
+    class={`flex flex-col border gap-4 p-6 m-6  bg-white dark:bg-black group-hover:backdrop-blur-lg group-hover:bg-transparent  ${getShadowClass(
+      post.data.shadow
+    )} transition-all duration-300 ease-in-out`}
+  >
+    <div class="flex gap-4 flex-col-reverse md:flex-row">
+      <div class="flex flex-col gap-4">
+        <h3 class="text-2xl font-bold text-start">{title}</h3>
+        <p class="max-w-72">{description}</p>
+      </div>
+      <div class="md:w-1/2 h-auto aspect-video overflow-hidden">
+        <img
+          src={post.data.heroImage}
+          class="w-full object-top object-cover aspect-video group-hover:scale-90 transition shadow-md"
+        />
+      </div>
+    </div>
+    <p class="text-xl font-semibold text-end relative self-end">
+      {price}
+      <span
+        class={`absolute bottom-0 left-0 w-0! h-1 bg-${post.data.shadow} transition-all duration-300 group-hover:w-full!`}
+      ></span>
+    </p>
+  </div>
+</a>

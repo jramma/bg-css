@@ -1,0 +1,54 @@
+---
+// Link.astro
+type ShadowType = "primary" | "secondary" | "tertiary" | "quaternary";
+
+interface Props {
+  href: string;
+  text: string;
+  shadow?: ShadowType | string;
+  out?: boolean;
+}
+
+const { href, text, shadow, out = false } = Astro.props;
+
+const currentPath = Astro.url.pathname;
+
+const normalize = (s: string) => s.replace(/\/+$/, "");
+
+const isContained = normalize(currentPath) === normalize(href);
+
+const shadowClasses: Record<ShadowType, string> = {
+  primary: "shadow-primary hover:shadow-primaryHover",
+  secondary: "shadow-secondary hover:shadow-secondaryHover",
+  tertiary: "shadow-tertiary hover:shadow-tertiaryHover",
+  quaternary: "shadow-quaternary hover:shadow-quaternaryHover",
+};
+
+const getShadowClass = (shadowType?: string) => {
+  return shadowType && shadowType in shadowClasses
+    ? shadowClasses[shadowType as ShadowType]
+    : "";
+};
+---
+
+{isContained ? (
+  <a href={href} class="" rel="noopener noreferrer">
+    <span class="bg-black dark:bg-white h-6 max-w-1 animate-pulse my-1 flex self-start" />
+  </a>
+) : out ? (
+  <a
+    href={href}
+    target="_blank"
+    class={`flex relative justify-center w-full text-center text-lg self-start border-solid border bg-white dark:bg-black border-black dark:border-white px-3 py-1 md:px-6 md:py-2 font-medium ${getShadowClass(shadow)} transition-all duration-300 ease-in-out`}
+    rel="noopener noreferrer"
+  >
+    {text}
+  </a>
+) : (
+  <a
+    href={href}
+    class={`flex relative text-lg self-start border-solid border bg-white dark:bg-black border-black dark:border-white px-3 py-1 md:px-6 md:py-2 font-medium ${getShadowClass(shadow)} transition-all duration-300 ease-in-out`}
+  >
+    {text}
+  </a>
+)}

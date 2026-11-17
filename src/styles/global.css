@@ -1,0 +1,397 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+    /* Font families */
+    --font-sans: "Geist", sans-serif;
+    --font-mono: "Geist", monospace;
+
+    /* Colors */
+    --color-white: #f2f2f2;
+    --color-white-100: #ffffff;
+    --color-white-200: #f9f9f9;
+    --color-black: #040404;
+    --color-black-100: #020202;
+    --color-wp: #21759b;
+
+    --color-primary: var(--color-yellow-300);
+    --color-secondary: var(--color-purple-300);
+    --color-tertiary: var(--color-violet-300);
+    --color-quaternary: var(--color-blue-300);
+
+    /* Box Shadows */
+    --shadow-card: 7px 7px var(--color-black);
+    --shadow-hover: 11px 11px var(--color-black);
+    --shadow-card-dark: 7px 7px var(--color-white);
+    --shadow-hover-dark: 11px 11px var(--color-white);
+    --shadow-primary: 7px 7px var(--color-yellow-300);
+    --shadow-secondary: 7px 7px var(--color-purple-300);
+    --shadow-tertiary: 7px 7px var(--color-violet-300);
+    --shadow-quaternary: 7px 7px var(--color-blue-300);
+    --shadow-primaryHover: 11px 11px var(--color-yellow-300);
+    --shadow-secondaryHover: 11px 11px var(--color-purple-300);
+    --shadow-tertiaryHover: 11px 11px var(--color-violet-300);
+    --shadow-quaternaryHover: 11px 11px var(--color-blue-300);
+    --shadow-wp: 7px 7px #21759b;
+    --shadow-wpHover: 11px 11px #21759b;
+
+    /* Font sizes */
+    --text-2xs: 0.5rem;
+    --text-3xs: 0.375rem;
+
+    /* Max widths (fractional) */
+    --max-w-1-12: 8.333333%;
+    --max-w-2-12: 16.666667%;
+    --max-w-3-12: 25%;
+    --max-w-4-12: 33.333333%;
+    --max-w-5-12: 41.666667%;
+    --max-w-6-12: 50%;
+    --max-w-7-12: 58.333333%;
+    --max-w-8-12: 66.666667%;
+    --max-w-9-12: 75%;
+    --max-w-10-12: 83.333333%;
+    --max-w-11-12: 91.666667%;
+    --max-w-12-12: 100%;
+
+    /* Max heights (viewport) */
+    --max-h-1-10: 10vh;
+    --max-h-2-10: 20vh;
+    --max-h-3-10: 30vh;
+    --max-h-4-10: 40vh;
+    --max-h-5-10: 50vh;
+    --max-h-6-10: 60vh;
+    --max-h-7-10: 70vh;
+    --max-h-8-10: 80vh;
+}
+
+@layer utilities {
+    .shadow-inner-fade {
+        box-shadow: inset 0 -60px 40px -20px rgba(242, 242, 242, 1); /* color claro */
+    }
+
+    .dark .shadow-inner-fade-dark {
+        box-shadow: inset 0 -60px 40px -20px rgba(2, 2, 2, 1); /* color oscuro */
+    }
+}
+
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Black.woff2") format("woff2");
+    font-weight: 900;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Bold.woff2") format("woff2");
+    font-weight: 700;
+    font-style: normal;
+    --border-white-rad: rgba(242, 242, 242, 0.8);
+
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-ExtraLight.woff2") format("woff2");
+    font-weight: 200;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Light.woff2") format("woff2");
+    font-weight: 300;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Medium.woff2") format("woff2");
+    font-weight: 500;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-SemiBold.woff2") format("woff2");
+    font-weight: 600;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist-Thin.woff2") format("woff2");
+    font-weight: 100;
+    font-style: normal;
+}
+@font-face {
+    font-family: "Geist";
+    src: url("./fonts/Geist[wght].woff2") format("woff2");
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+body {
+    font-family: "Geist", sans-serif;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+.no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+p {
+    @apply max-w-96;
+}
+
+h2 {
+    @apply text-2xl font-semibold;
+}
+ol {
+    @apply list-decimal pl-6;
+}
+/* Tablas */
+table {
+    display: block;
+    max-width: 100%;
+    overflow: scroll;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    font-family: "Courier New", Courier, monospace;
+    font-size: 0.95rem;
+    color: #222;
+    border: 2px solid #000;
+    box-shadow: 4px 4px 0 #000;
+    @apply dark:border-white border;
+}
+
+/* Cabeceras */
+thead tr {
+    background-color: #000;
+    color: #fff;
+    @apply dark:border-white border;
+}
+
+th {
+    @apply dark:border-white border;
+
+    padding: 1rem 1.2rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.85rem;
+    border: 1px solid #000;
+}
+
+/* Celdas */
+td {
+    padding: 0.9rem 1.2rem;
+    border: 1px solid #000;
+    vertical-align: middle;
+}
+
+/* Filas */
+tbody tr:nth-child(odd) {
+    background-color: var(--color-white);
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f4f4f4;
+}
+
+tbody tr:hover {
+    background-color: #e0dede;
+    cursor: default;
+}
+
+/* Celdas especiales */
+td:first-child {
+    font-weight: bold;
+    background-color: #eaeaea;
+    color: #000;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+}
+
+/* Nota bajo tabla */
+table + p {
+    font-size: 0.85rem;
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+    font-style: italic;
+    color: #444;
+}
+
+/* Background  global*/
+@keyframes move {
+    100% {
+        transform: translate3d(0, 0, 1px) rotate(360deg);
+    }
+}
+
+.background {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: var(--color-white);
+    overflow: hidden;
+    transition: background 300ms;
+}
+.dark .background {
+    background: var(--color-black);
+}
+.background span {
+    width: 33vmin;
+    height: 33vmin;
+    border-radius: 33vmin;
+    backface-visibility: hidden;
+    position: absolute;
+    animation: move;
+    animation-duration: 35s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+.background span:nth-child(0) {
+    color: var(--color-primary);
+    top: 57%;
+    left: 83%;
+    animation-duration: 87s;
+    animation-delay: -43s;
+    transform-origin: 17vw -20vh;
+    box-shadow: 66vmin 0 9.178005356481801vmin currentColor;
+}
+.background span:nth-child(1) {
+    color: var(--color-secondary);
+    top: 87%;
+    left: 66%;
+    animation-duration: 105s;
+    animation-delay: -46s;
+    transform-origin: 3vw -3vh;
+    box-shadow: -66vmin 0 8.944846430608962vmin currentColor;
+}
+.background span:nth-child(2) {
+    color: var(--color-tertiary);
+    top: 16%;
+    left: 18%;
+    animation-duration: 88s;
+    animation-delay: -132s;
+    transform-origin: 11vw 6vh;
+    box-shadow: 66vmin 0 8.352532412578418vmin currentColor;
+}
+.background span:nth-child(3) {
+    color: var(--color-quaternary);
+    top: 30%;
+    left: 56%;
+    animation-duration: 77s;
+    animation-delay: -11s;
+    transform-origin: -17vw 14vh;
+    box-shadow: 66vmin 0 8.911216649195733vmin currentColor;
+}
+.background span:nth-child(4) {
+    color: var(--color-secondary);
+    top: 64%;
+    left: 88%;
+    animation-duration: 101s;
+    animation-delay: -68s;
+    transform-origin: 12vw 12vh;
+    box-shadow: -66vmin 0 8.403674499117407vmin currentColor;
+}
+.background span:nth-child(5) {
+    color: var(--color-primary);
+    top: 97%;
+    left: 30%;
+    animation-duration: 23s;
+    animation-delay: -91s;
+    transform-origin: 0vw 16vh;
+    box-shadow: -66vmin 0 8.395144529378367vmin currentColor;
+}
+.background span:nth-child(6) {
+    color: var(--color-secondary);
+    top: 86%;
+    left: 79%;
+    animation-duration: 107s;
+    animation-delay: -4s;
+    transform-origin: -10vw -11vh;
+    box-shadow: -66vmin 0 9.000293588942164vmin currentColor;
+}
+.background span:nth-child(7) {
+    color: var(--color-tertiary);
+    top: 23%;
+    left: 14%;
+    animation-duration: 100s;
+    animation-delay: -102s;
+    transform-origin: -13vw 0vh;
+    box-shadow: -66vmin 0 9.111641003241735vmin currentColor;
+}
+.background span:nth-child(8) {
+    color: var(--color-quaternary);
+    top: 43%;
+    left: 65%;
+    animation-duration: 31s;
+    animation-delay: -50s;
+    transform-origin: 0vw 17vh;
+    box-shadow: 66vmin 0 8.954574122133613vmin currentColor;
+}
+
+/* MENU css */
+.menu {
+    label {
+        display: flex;
+        flex-direction: column;
+        width: 40px;
+        cursor: pointer;
+    }
+
+    label span {
+        background: currentColor;
+        border-radius: 10px;
+        height: 5px;
+        margin: 7px 0;
+        transition: 0.4s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+    }
+
+    span:nth-of-type(1) {
+        width: 50%;
+    }
+
+    span:nth-of-type(2) {
+        width: 100%;
+    }
+
+    span:nth-of-type(3) {
+        width: 75%;
+    }
+
+    input[type="checkbox"] {
+        display: none;
+    }
+
+    input[type="checkbox"]:checked ~ span:nth-of-type(1) {
+        transform-origin: bottom;
+        transform: rotatez(45deg) translate(8px, 0px);
+    }
+
+    input[type="checkbox"]:checked ~ span:nth-of-type(2) {
+        transform-origin: top;
+        transform: rotatez(-45deg);
+    }
+
+    input[type="checkbox"]:checked ~ span:nth-of-type(3) {
+        transform-origin: bottom;
+        width: 50%;
+        transform: translate(30px, -11px) rotatez(45deg);
+    }
+}

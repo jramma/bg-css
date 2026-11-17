@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { Icon } from "astro-icon/components";
+import { slide } from "astro:transitions";
+---
+
+<Layout>
+  <div
+    transition:animate={slide({ duration: "0.4s" })}
+    class="flex grow items-center justify-center"
+  >
+    <div
+      class="relative flex items-center text-center flex-col gap-10 md:w-auto md:text-3xl"
+    >
+      <div class="flex gap-4 text-6xl">
+        <a
+          href="https://casset.cat"
+          target="_blank"
+          rel="noopener noreferrer"><Icon name="linkedin" /></a
+        >
+        <a
+          class="self-end"
+          rel="noopener noreferrer"
+          href="https://github.com/jramma"
+          target="_blank"
+        >
+          <Icon name="github" /></a
+        >
+      </div>
+      <a href="mailto:hola@casset.cat" class="font-semibold">
+        hola@casset.cat</a
+      >
+    </div>
+  </div>
+</Layout>
