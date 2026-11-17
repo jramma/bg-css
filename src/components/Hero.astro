@@ -1,34 +1,43 @@
 ---
 import { TextSlideIn } from "@/components/react/TextSlideIn";
+import { GITHUB_USERNAME } from "@/consts";
 import { getLangFromUrl, useTranslations } from "../i18n/utils";
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
-import { Icon } from "astro-icon/components";
+
+const getGithubAvatar = async (username: string): Promise<string> => {
+    const res = await fetch(`https://api.github.com/users/${username}`);
+    const data = await res.json();
+    return data.avatar_url;
+};
+const avatar = await getGithubAvatar(GITHUB_USERNAME);
+
 import BlurFadeText from "@/components/react/blur-fade-text";
 ---
 
 <section class="flex flex-col gap-2 md:gap-12 max-w-full">
-  <TextSlideIn
-    client:load
-    text={t("title")}
-    delay={0.4}
-    className="text-4xl text-ellipsis max-w-full md:max-w-none md:text-6xl font-semibold  text-shadow-lg"
-  />
-
-  <div class="flex flex-col gap-6">
-    <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
-
-    <div class="flex gap-6 md:max-w-72 w-full items-center max-w-full">
-      <Icon
-        name="cactus"
-        class="object-cover shrink-0 my-2 hidden md:block w-10 h-10 self-start border-black dark:border-gray-100 aspect-square"
-      />
-      <BlurFadeText
-        text={t("description")}
+    <TextSlideIn
         client:load
-        delay={0.5}
-        className="revealed font-semibold text-xl min-w-72"
-      />
+        text={t("title")}
+        delay={0.4}
+        className="text-4xl text-ellipsis max-w-full md:max-w-none md:text-6xl font-semibold  text-shadow-lg"
+    />
+
+    <div class="flex flex-col gap-6">
+        <div class="h-1 bg-black w-3/4 dark:bg-white flex shrink-0"></div>
+
+        <div class="flex gap-6 md:max-w-72 w-full items-center max-w-full">
+            <img
+                src={avatar}
+                alt="User avatar"
+                class="w-12 h-12 rounded-full"
+            />
+            <BlurFadeText
+                text={t("description")}
+                client:load
+                delay={0.5}
+                className="revealed font-semibold text-xl min-w-72"
+            />
+        </div>
     </div>
-  </div>
 </section>
